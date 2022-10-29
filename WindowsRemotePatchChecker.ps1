@@ -236,7 +236,7 @@ switch($SearchSelectionMode){
                         Write-Host " on server " -NoNewLine
                         Write-Host "$Server" -ForegroundColor Green
                         If($ExportCheck -eq "Y"){
-                            Write-Host "No updates installed from $CheckDate on server $Server." | Add-Content -Path $ExportList
+                            Write-Output "No updates installed from $CheckDate on server $Server." | Add-Content -Path $ExportList
                         }
                     }
                     Else{
