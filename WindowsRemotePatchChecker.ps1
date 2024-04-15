@@ -24,7 +24,7 @@
 #>
 
 #region Functions ------------------------------------------------------------------------------------------------
-Function pause ($message)
+Function Exit-Prompt ($message)
 {
     # Check if running Powershell ISE
     if ($psISE)
@@ -69,7 +69,7 @@ switch($SearchSelectionMode){
 
         While($true){
             #Clear-Host
-            Write-Host "`n`nChecking for installed updates from " -NoNewLine 
+            Write-Host "`n`nChecking for installed updates from " -NoNewLine
             Write-Host "$CheckDate" -NoNewLine -ForegroundColor Yellow
             Write-Host " on " -NoNewLine
             Write-Host "$Server" -ForegroundColor Green -NoNewLine
@@ -174,7 +174,7 @@ switch($SearchSelectionMode){
                 Write-Host "Multi-Server OS Patch Check Tool`n" -ForegroundColor Yellow
                 $CSV = Read-Host "Enter path of .csv with server list"
                 If(-Not(Test-Path -Path $CSV)){
-                    Write-Host "`nInvalid path " -NoNewLine 
+                    Write-Host "`nInvalid path " -NoNewLine
                     Write-Host "$CSV" -NoNewLine -ForegroundColor Red
                     Write-Host ". Please enter a valid file path.`n"
                     Start-Sleep -Seconds 3
@@ -207,9 +207,9 @@ switch($SearchSelectionMode){
                     }Until($ExportList.Contains(".csv"))
                     Write-Output "Installed OS Patch Check" | Add-Content -Path $ExportList
                     If(-Not(Test-Path -Path $ExportList)){
-                        Write-Host "`nInvalid path " -NoNewLine 
+                        Write-Host "`nInvalid path " -NoNewLine
                         Write-Host "$ExportList" -NoNewLine -ForegroundColor Red
-                        Write-Host ". Please enter a valid file path.`n" 
+                        Write-Host ". Please enter a valid file path.`n"
                     }
                 }Until(Test-Path -Path $ExportList)
             }
@@ -224,7 +224,7 @@ switch($SearchSelectionMode){
                 }
                 If($ServerExists){
                     #Clear-Host
-                    Write-Host "`n`nChecking for installed updates from " -NoNewLine 
+                    Write-Host "`n`nChecking for installed updates from " -NoNewLine
                     Write-Host "$CheckDate" -NoNewLine -ForegroundColor Yellow
                     Write-Host " on " -NoNewLine
                     Write-Host "$Server" -ForegroundColor Green -NoNewLine
@@ -252,10 +252,10 @@ switch($SearchSelectionMode){
                     }
                     Write-Host "`nCompleted search for " -NoNewLine
                     Write-Host "$Server" -ForegroundColor Green -NoNewLine
-                    Write-Host "... moving to next server in list.`n"                
+                    Write-Host "... moving to next server in list.`n"
                 }
             }
-            pause "`nPress any key to continue...`n"
+            Exit-Prompt "`nPress any key to continue...`n"
             $SubmenuSelection = Read-Host "Would you like to search the same list of servers with a different date range? Y/N"
             switch($SubMenuSelection){
                 "Y"{
@@ -265,7 +265,7 @@ switch($SearchSelectionMode){
                     Clear-Host
                 }
                 "N"{
-                    Pause "Press any key to exit script."
+                    Exit-Prompt "Press any key to exit script."
                     Exit
                 }
             }
